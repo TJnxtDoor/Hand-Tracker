@@ -45,7 +45,7 @@ class Program
     // CREATE: Webcam Tracking Loop
     static async Task RunWebcam()
     {
-        using var capture = new VideoCapture(0);
+        using var capture = new VideoCapture(0, VideoCaptureAPIs.DSHOW);
         if (!capture.IsOpened())
         {
             Console.WriteLine("Could not open webcam. Press Enter to go back.");
