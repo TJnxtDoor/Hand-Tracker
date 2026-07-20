@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Hand_Tracker</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.13.0.20260627" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Exclude Web API directory to avoid compiling its files in this project -->
+    <Compile Remove="Web API\**" />
+    <Content Remove="Web API\**" />
+    <EmbeddedResource Remove="Web API\**" />
+    <None Remove="Web API\**" />
+
+    <!-- Exclude Test.cs from the main application compilation -->
+    <Compile Remove="Test.cs" />
+    <None Include="Test.cs" />
+
+    <!-- Exclude template Program.cs to let WebCam.cs be the main entry point -->
+    <Compile Remove="Program.cs" />
+    <None Include="Program.cs" />
+  </ItemGroup>
+
+</Project>
