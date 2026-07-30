@@ -2,28 +2,6 @@
   "version": 4,
   "targets": {
     "net10.0": {
-      "Microsoft.Win32.SystemEvents/10.0.9": {
-        "type": "package",
-        "compile": {
-          "lib/net10.0/Microsoft.Win32.SystemEvents.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net10.0/Microsoft.Win32.SystemEvents.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net8.0/_._": {}
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net10.0/Microsoft.Win32.SystemEvents.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
-        }
-      },
       "OpenCvSharp4/4.13.0.20260627": {
         "type": "package",
         "compile": {
@@ -40,7 +18,8 @@
       "OpenCvSharp4.runtime.win/4.13.0.20260627": {
         "type": "package",
         "build": {
-          "build/net8.0/_._": {}
+          "build/net8.0/OpenCvSharp4.runtime.win.props": {},
+          "build/net8.0/OpenCvSharp4.runtime.win.targets": {}
         },
         "runtimeTargets": {
           "runtimes/win-x64/native/OpenCvSharpExtern.dll": {
@@ -52,101 +31,10 @@
             "rid": "win-x64"
           }
         }
-      },
-      "OpenCvSharp4.Windows/4.13.0.20260627": {
-        "type": "package",
-        "dependencies": {
-          "OpenCvSharp4": "4.13.0.20260627",
-          "OpenCvSharp4.WpfExtensions": "4.13.0.20260627",
-          "OpenCvSharp4.runtime.win": "4.13.0.20260627"
-        }
-      },
-      "OpenCvSharp4.WpfExtensions/4.13.0.20260627": {
-        "type": "package",
-        "dependencies": {
-          "OpenCvSharp4": "4.13.0.20260627",
-          "System.Drawing.Common": "10.0.9"
-        },
-        "compile": {
-          "lib/net48/OpenCvSharp.WpfExtensions.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net48/OpenCvSharp.WpfExtensions.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "System.Drawing.Common/10.0.9": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.SystemEvents": "10.0.9"
-        },
-        "compile": {
-          "lib/net10.0/System.Drawing.Common.dll": {
-            "related": ".pdb;.xml"
-          },
-          "lib/net10.0/System.Private.Windows.Core.dll": {
-            "related": ".xml"
-          },
-          "lib/net10.0/System.Private.Windows.GdiPlus.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net10.0/System.Drawing.Common.dll": {
-            "related": ".pdb;.xml"
-          },
-          "lib/net10.0/System.Private.Windows.Core.dll": {
-            "related": ".xml"
-          },
-          "lib/net10.0/System.Private.Windows.GdiPlus.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net8.0/_._": {}
-        }
       }
     }
   },
   "libraries": {
-    "Microsoft.Win32.SystemEvents/10.0.9": {
-      "sha512": "dk5HKolAR9bBxlL4dl6Koaf0s/Q47QApog+/o341LSuvWGW6ig4q5fTsgYG0MrK//l2Slv6mygncMK/8lgXVDg==",
-      "type": "package",
-      "path": "microsoft.win32.systemevents/10.0.9",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "PACKAGE.md",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net8.0/_._",
-        "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
-        "lib/net10.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/net10.0/Microsoft.Win32.SystemEvents.xml",
-        "lib/net462/Microsoft.Win32.SystemEvents.dll",
-        "lib/net462/Microsoft.Win32.SystemEvents.xml",
-        "lib/net8.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/net8.0/Microsoft.Win32.SystemEvents.xml",
-        "lib/net9.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/net9.0/Microsoft.Win32.SystemEvents.xml",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "microsoft.win32.systemevents.10.0.9.nupkg.sha512",
-        "microsoft.win32.systemevents.nuspec",
-        "runtimes/win/lib/net10.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/net10.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.xml",
-        "useSharedDesignerContext.txt"
-      ]
-    },
     "OpenCvSharp4/4.13.0.20260627": {
       "sha512": "nYk95jkyYY9f0sF5KqZ3OB1SWkmqsfV7eN0ROiQds/rxpSn0v1G0QIedMbwuqbdPhvQnOIG2DDmpkLnHEJMh8Q==",
       "type": "package",
@@ -187,94 +75,12 @@
         "runtimes/win-x64/native/OpenCvSharpExtern.dll",
         "runtimes/win-x64/native/opencv_videoio_ffmpeg4130_64.dll"
       ]
-    },
-    "OpenCvSharp4.Windows/4.13.0.20260627": {
-      "sha512": "YYJAej4HZYPmN+fG2MCUFDZ/hxsb66PJxAxKuVLFolysGl6opszhILRT2NO/ZEagnlqZ3mlUYGiOjCN0Jj276A==",
-      "type": "package",
-      "path": "opencvsharp4.windows/4.13.0.20260627",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.managed.md",
-        "opencvsharp.png",
-        "opencvsharp4.windows.4.13.0.20260627.nupkg.sha512",
-        "opencvsharp4.windows.nuspec"
-      ]
-    },
-    "OpenCvSharp4.WpfExtensions/4.13.0.20260627": {
-      "sha512": "6cxOJWTuwUGFPgeyrjCQGVtulK25ej1G6f+wW5fVUrgPSNKlUCOOpPAkgq1kHFJ22mNJAlIR8OrKpafBtS8kCA==",
-      "type": "package",
-      "path": "opencvsharp4.wpfextensions/4.13.0.20260627",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.managed.md",
-        "lib/net48/OpenCvSharp.WpfExtensions.dll",
-        "lib/net48/OpenCvSharp.WpfExtensions.xml",
-        "lib/net8.0-windows7.0/OpenCvSharp.WpfExtensions.dll",
-        "lib/net8.0-windows7.0/OpenCvSharp.WpfExtensions.xml",
-        "opencvsharp.png",
-        "opencvsharp4.wpfextensions.4.13.0.20260627.nupkg.sha512",
-        "opencvsharp4.wpfextensions.nuspec"
-      ]
-    },
-    "System.Drawing.Common/10.0.9": {
-      "sha512": "ShkEj8jOhklJgrN3SoaVbCcopvqyIgVXHso2/eibQBL7IZxzJjND77UYVlViHqpwPxyQeA67IOut4b41clBkQw==",
-      "type": "package",
-      "path": "system.drawing.common/10.0.9",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "PACKAGE.md",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/System.Drawing.Common.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net8.0/_._",
-        "buildTransitive/netcoreapp2.0/System.Drawing.Common.targets",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net10.0/System.Drawing.Common.dll",
-        "lib/net10.0/System.Drawing.Common.pdb",
-        "lib/net10.0/System.Drawing.Common.xml",
-        "lib/net10.0/System.Private.Windows.Core.dll",
-        "lib/net10.0/System.Private.Windows.Core.xml",
-        "lib/net10.0/System.Private.Windows.GdiPlus.dll",
-        "lib/net10.0/System.Private.Windows.GdiPlus.xml",
-        "lib/net462/System.Drawing.Common.dll",
-        "lib/net462/System.Drawing.Common.pdb",
-        "lib/net462/System.Drawing.Common.xml",
-        "lib/net8.0/System.Drawing.Common.dll",
-        "lib/net8.0/System.Drawing.Common.pdb",
-        "lib/net8.0/System.Drawing.Common.xml",
-        "lib/net8.0/System.Private.Windows.Core.dll",
-        "lib/net8.0/System.Private.Windows.Core.xml",
-        "lib/net8.0/System.Private.Windows.GdiPlus.dll",
-        "lib/net8.0/System.Private.Windows.GdiPlus.xml",
-        "lib/net9.0/System.Drawing.Common.dll",
-        "lib/net9.0/System.Drawing.Common.pdb",
-        "lib/net9.0/System.Drawing.Common.xml",
-        "lib/net9.0/System.Private.Windows.Core.dll",
-        "lib/net9.0/System.Private.Windows.Core.xml",
-        "lib/net9.0/System.Private.Windows.GdiPlus.dll",
-        "lib/net9.0/System.Private.Windows.GdiPlus.xml",
-        "lib/netstandard2.0/System.Drawing.Common.dll",
-        "lib/netstandard2.0/System.Drawing.Common.pdb",
-        "lib/netstandard2.0/System.Drawing.Common.xml",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "system.drawing.common.10.0.9.nupkg.sha512",
-        "system.drawing.common.nuspec",
-        "useSharedDesignerContext.txt"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "OpenCvSharp4.Windows >= 4.13.0.20260627"
+      "OpenCvSharp4 >= 4.13.0.20260627",
+      "OpenCvSharp4.runtime.win >= 4.13.0.20260627"
     ]
   },
   "packageFolders": {
@@ -324,7 +130,11 @@
         "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
-          "OpenCvSharp4.Windows": {
+          "OpenCvSharp4": {
+            "target": "Package",
+            "version": "[4.13.0.20260627, )"
+          },
+          "OpenCvSharp4.runtime.win": {
             "target": "Package",
             "version": "[4.13.0.20260627, )"
           }
@@ -622,17 +432,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'OpenCvSharp4.WpfExtensions 4.13.0.20260627' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net10.0'. This package may not be fully compatible with your project.",
-      "libraryId": "OpenCvSharp4.WpfExtensions",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  }
 }

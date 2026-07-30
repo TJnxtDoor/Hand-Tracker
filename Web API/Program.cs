@@ -2,21 +2,8 @@ using CapstoneProject;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
-app.UseHttpsRedirection();
-
-// Thread-safe in-memory storage for logs
 List<LogItem> logs = [];
 object logsLock = new();
 int nextId = 1;
@@ -58,6 +45,7 @@ app.MapPut("/api/logs/{id:int}", (int id, [FromBody] LogItem updatedLog) =>
         {
             return Results.NotFound();
         }
+
         existingLog.Letter = updatedLog.Letter;
         existingLog.Fingers = updatedLog.Fingers;
         return Results.NoContent();
@@ -73,6 +61,7 @@ app.MapDelete("/api/logs/{id:int}", (int id) =>
         {
             return Results.NotFound();
         }
+
         logs.Remove(log);
         return Results.NoContent();
     }

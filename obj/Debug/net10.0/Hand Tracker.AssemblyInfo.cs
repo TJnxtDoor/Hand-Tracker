@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hand Tracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+da720100aeb61e419822ca88acf508eae63c9911")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1656f7fafb2aaf7562c3c83d4fa3d02ecf7804c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hand Tracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hand Tracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

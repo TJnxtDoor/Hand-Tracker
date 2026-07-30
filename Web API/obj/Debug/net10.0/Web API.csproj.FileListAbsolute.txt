@@ -1,10 +1,8 @@
-C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.csproj.AssemblyReference.cache
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\rpswa.dswa.cache.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.AssemblyInfoInputs.cache
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.AssemblyInfo.cs
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.csproj.CoreCompileInputs.cache
-C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.sourcelink.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\bin\Debug\net10.0\appsettings.Development.json
@@ -15,8 +13,6 @@ C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\bin\Debug\net10.0\Web API.deps
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\bin\Debug\net10.0\Web API.runtimeconfig.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\bin\Debug\net10.0\Web API.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\bin\Debug\net10.0\Web API.pdb
-C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
-C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\bin\Debug\net10.0\Microsoft.OpenApi.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -26,9 +22,16 @@ C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\staticwebass
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.csproj.Up2Date
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\refint\Web API.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.pdb
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\Web API.genruntimeconfig.cache
 C:\Users\Tj\Documents\GitHub\Hand Tracker\Web API\obj\Debug\net10.0\ref\Web API.dll
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\appsettings.Development.json
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\appsettings.json
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\Web API.staticwebassets.endpoints.json
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\Web API.exe
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\Web API.deps.json
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\Web API.runtimeconfig.json
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\Web API.dll
+C:\Users\Tj\Documents\GitHub\Hand Tracker\.verify\WebAPI\Web API.pdb
