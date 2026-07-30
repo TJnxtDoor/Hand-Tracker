@@ -1,22 +1,12 @@
-"""Simple webcam viewer for testing the default camera.
 
-Usage:
-    python webcam.py
-    python webcam.py --camera 1
-
-Keys:
-    q or Esc  Quit
-    s         Save a snapshot to ./snapshots
-"""
-
-from __future__ import annotations
-
+from __future__ import annotations 
 import argparse
 import subprocess
 import sys
 import time
 from datetime import datetime
 from pathlib import Path
+from urllib.request import urlretrieve
 
 try:
     import cv2
@@ -24,18 +14,18 @@ except ModuleNotFoundError:
     print("OpenCV is not installed. Install it with: pip install opencv-python")
     sys.exit(1)
 
-try:
-    import mediapipe as mp
-except ModuleNotFoundError:
-    mp = None
-
-
 FINGER_TIP_AND_PIP = {
     "index": (8, 6),
     "middle": (12, 10),
     "ring": (16, 14),
     "pinky": (20, 18),
 }
+
+HAND_LANDMARKER_MODEL_URL = (
+    "https://storage.googleapis.com/mediapipe-models/hand_landmarker/"
+    "hand_landmarker/float16/1/hand_landmarker.task"
+)
+HAND_LANDMARKER_MODEL_PATH = Path("models/hand_landmarker.task")
 
 
 def parse_args() -> argparse.Namespace:
@@ -97,6 +87,68 @@ def is_middle_finger_only(landmarks) -> bool:
     )
 
 
+def ensure_hand_landmarker_model() -> Path:
+    if HAND_LANDMARKER_MODEL_PATH.exists():
+        return HAND_LANDMARKER_MODEL_PATH
+
+    print("Downloading MediaPipe hand landmark model...")
+    HAND_LANDMARKER_MODEL_PATH.parent.mkdir(exist_ok=True)
+    urlretrieve(HAND_LANDMARKER_MODEL_URL, HAND_LANDMARKER_MODEL_PATH)
+    return HAND_LANDMARKER_MODEL_PATH
+
+
+def create_hand_tracker():
+    try:
+        import mediapipe as mp
+        from mediapipe.tasks import python as mp_tasks_python
+        from mediapipe.tasks.python import vision
+        from mediapipe.tasks.python.vision import hand_landmarker
+    except ModuleNotFoundError:
+        print("MediaPipe is not installed. Install it with: pip install mediapipe")
+        return None
+
+    try:
+        model_path = ensure_hand_landmarker_model()
+    except OSError as exc:
+        print(f"Could not download the MediaPipe hand model: {exc}")
+        print(f"Download it manually and save it as: {HAND_LANDMARKER_MODEL_PATH}")
+        return None
+
+    options = vision.HandLandmarkerOptions(
+        base_options=mp_tasks_python.BaseOptions(model_asset_path=str(model_path)),
+        running_mode=vision.RunningMode.VIDEO,
+        num_hands=1,
+        min_hand_detection_confidence=0.7,
+        min_hand_presence_confidence=0.7,
+        min_tracking_confidence=0.7,
+    )
+
+    tracker = vision.HandLandmarker.create_from_options(options)
+    connections = hand_landmarker.HandLandmarksConnections.HAND_CONNECTIONS
+    return mp, tracker, connections
+
+
+def draw_hand_landmarks(frame, landmarks, connections) -> None:
+    height, width = frame.shape[:2]
+    points = [
+        (int(landmark.x * width), int(landmark.y * height))
+        for landmark in landmarks
+    ]
+
+    for connection in connections:
+        cv2.line(
+            frame,
+            points[connection.start],
+            points[connection.end],
+            (80, 220, 255),
+            2,
+            cv2.LINE_AA,
+        )
+
+    for point in points:
+        cv2.circle(frame, point, 4, (0, 255, 0), -1, cv2.LINE_AA)
+
+
 def schedule_windows_shutdown(delay_seconds: int) -> None:
     subprocess.run(
         ["shutdown", "/s", "/t", str(max(0, delay_seconds))],
@@ -106,16 +158,18 @@ def schedule_windows_shutdown(delay_seconds: int) -> None:
 
 def main() -> int:
     args = parse_args()
+    mediapipe_module = None
+    hand_connections = None
 
     if args.shutdown_on_middle_finger:
         if not sys.platform.startswith("win"):
             print("Automatic shutdown is only configured for Windows.")
             return 1
-        if mp is None:
-            print("MediaPipe is not installed. Install it with: pip install mediapipe")
-            return 1
 
-    capture = cv2.VideoCapture(args.camera, cv2.CAP_DSHOW)
+    if sys.platform.startswith("win"):
+        capture = cv2.VideoCapture(args.camera, cv2.CAP_DSHOW)
+    else:
+        capture = cv2.VideoCapture(args.camera)
     capture.set(cv2.CAP_PROP_FRAME_WIDTH, args.width)
     capture.set(cv2.CAP_PROP_FRAME_HEIGHT, args.height)
 
@@ -139,11 +193,12 @@ def main() -> int:
 
     hand_tracker = None
     if args.shutdown_on_middle_finger:
-        hand_tracker = mp.solutions.hands.Hands(
-            max_num_hands=1,
-            min_detection_confidence=0.7,
-            min_tracking_confidence=0.7,
-        )
+        tracker_parts = create_hand_tracker()
+        if tracker_parts is None:
+            capture.release()
+            cv2.destroyAllWindows()
+            return 1
+        mediapipe_module, hand_tracker, hand_connections = tracker_parts
 
     try:
         while True:
@@ -162,20 +217,23 @@ def main() -> int:
                 fps = 0.9 * fps + 0.1 * (1.0 / elapsed)
 
             middle_finger_detected = False
-            if hand_tracker is not None:
+            if (
+                hand_tracker is not None
+                and mediapipe_module is not None
+                and hand_connections is not None
+            ):
                 rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                results = hand_tracker.process(rgb_frame)
+                mp_image = mediapipe_module.Image(
+                    image_format=mediapipe_module.ImageFormat.SRGB,
+                    data=rgb_frame,
+                )
+                timestamp_ms = int(now * 1000)
+                results = hand_tracker.detect_for_video(mp_image, timestamp_ms)
 
-                if results.multi_hand_landmarks:
-                    hand_landmarks = results.multi_hand_landmarks[0]
-                    mp.solutions.drawing_utils.draw_landmarks(
-                        frame,
-                        hand_landmarks,
-                        mp.solutions.hands.HAND_CONNECTIONS,
-                    )
-                    middle_finger_detected = is_middle_finger_only(
-                        hand_landmarks.landmark
-                    )
+                if results.hand_landmarks:
+                    hand_landmarks = results.hand_landmarks[0]
+                    draw_hand_landmarks(frame, hand_landmarks, hand_connections)
+                    middle_finger_detected = is_middle_finger_only(hand_landmarks)
 
                 if middle_finger_detected:
                     if gesture_started_at is None:
@@ -223,6 +281,9 @@ def main() -> int:
             if key in (ord("q"), 27):
                 break
 
+            if cv2.getWindowProperty(window_name, cv2.WND_PROP_VISIBLE) < 1:
+                break
+
             if key == ord("s"):
                 snapshots_dir = Path("snapshots")
                 snapshots_dir.mkdir(exist_ok=True)
@@ -240,4 +301,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
