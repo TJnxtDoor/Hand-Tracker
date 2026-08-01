@@ -16,7 +16,7 @@ except ModuleNotFoundError:
 
 FINGER_TIP_AND_PIP = {
     "index": (8, 6),
-    "middle": (12, 10),
+    "ok_sign": (12, 10),
     "ring": (16, 14),
     "pinky": (20, 18),
 }
@@ -54,9 +54,10 @@ def parse_args() -> argparse.Namespace:
         help="Disable mirror mode for the preview.",
     )
     parser.add_argument(
-        "--shutdown-on-middle-finger",
+        "--shutdown-on-ok-sign",
+        dest="shutdown_on_ok_sign",
         action="store_true",
-        help="Arm Windows shutdown when a middle-finger-only gesture is held.",
+        help="Arm Windows shutdown when an OK-sign-only gesture is held.",
     )
     parser.add_argument(
         "--gesture-hold-seconds",
@@ -73,17 +74,39 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def is_middle_finger_only(landmarks) -> bool:
-    fingers = {
-        name: landmarks[tip].y < landmarks[pip].y - 0.02
-        for name, (tip, pip) in FINGER_TIP_AND_PIP.items()
+def is_ok_sign_finger_only(landmarks) -> bool:
+    if len(landmarks) <= 20:
+        return False
+
+    tip_to_pip = {
+        "index": (8, 6),
+        "middle": (12, 10),
+        "ring": (16, 14),
+        "pinky": (20, 18),
     }
 
+    finger_states = {}
+    for name, (tip, pip) in tip_to_pip.items():
+        finger_states[name] = {
+            "tip_above_pip": landmarks[tip].y < landmarks[pip].y - 0.02,
+            "tip_below_pip": landmarks[tip].y > landmarks[pip].y + 0.02,
+            "tip_x_close": abs(landmarks[tip].x - landmarks[pip].x) < 0.08,
+        }
+
+    middle_finger_bent = (
+        finger_states["middle"]["tip_above_pip"]
+        and finger_states["middle"]["tip_x_close"]
+    )
+    index_finger_extended = not finger_states["index"]["tip_above_pip"]
+    ring_finger_extended = not finger_states["ring"]["tip_above_pip"]
+    pinky_extended = not finger_states["pinky"]["tip_above_pip"]
+
     return (
-        fingers["middle"]
-        and not fingers["index"]
-        and not fingers["ring"]
-        and not fingers["pinky"]
+        not middle_finger_bent
+        and index_finger_extended
+        and ring_finger_extended
+        and pinky_extended
+        and finger_states["middle"]["tip_below_pip"]
     )
 
 
@@ -160,8 +183,9 @@ def main() -> int:
     args = parse_args()
     mediapipe_module = None
     hand_connections = None
+    shutdown_on_gesture = bool(getattr(args, "shutdown_on_ok_sign", False))
 
-    if args.shutdown_on_middle_finger:
+    if shutdown_on_gesture:
         if not sys.platform.startswith("win"):
             print("Automatic shutdown is only configured for Windows.")
             return 1
@@ -185,14 +209,14 @@ def main() -> int:
     fps = 0.0
 
     print("Webcam running. Press q or Esc to quit. Press s to save a snapshot.")
-    if args.shutdown_on_middle_finger:
+    if shutdown_on_gesture:
         print(
-            "Shutdown armed. Hold a middle-finger-only gesture "
+            "Shutdown armed. Hold an OK sign gesture "
             f"for {args.gesture_hold_seconds:.1f} seconds to trigger it."
         )
 
     hand_tracker = None
-    if args.shutdown_on_middle_finger:
+    if shutdown_on_gesture:
         tracker_parts = create_hand_tracker()
         if tracker_parts is None:
             capture.release()
@@ -216,7 +240,7 @@ def main() -> int:
             if elapsed > 0:
                 fps = 0.9 * fps + 0.1 * (1.0 / elapsed)
 
-            middle_finger_detected = False
+            ok_sign_finger_detected = False
             if (
                 hand_tracker is not None
                 and mediapipe_module is not None
@@ -233,9 +257,9 @@ def main() -> int:
                 if results.hand_landmarks:
                     hand_landmarks = results.hand_landmarks[0]
                     draw_hand_landmarks(frame, hand_landmarks, hand_connections)
-                    middle_finger_detected = is_middle_finger_only(hand_landmarks)
+                    ok_sign_finger_detected = is_ok_sign_finger_only(hand_landmarks)
 
-                if middle_finger_detected:
+                if ok_sign_finger_detected:
                     if gesture_started_at is None:
                         gesture_started_at = now
 
@@ -245,7 +269,7 @@ def main() -> int:
                     if held_seconds >= args.gesture_hold_seconds and not shutdown_sent:
                         shutdown_sent = True
                         print(
-                            "Middle finger gesture confirmed. "
+                            "OK sign gesture confirmed. "
                             f"Shutting down in {args.shutdown_delay_seconds} seconds."
                         )
                         schedule_windows_shutdown(args.shutdown_delay_seconds)

@@ -8,7 +8,7 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\CodexSandboxOffline\\.nuget\\packages\\": {}
+    "C:\\Users\\Tj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -16,7 +16,7 @@
       "projectUniqueName": "C:\\Users\\Tj\\Documents\\GitHub\\Hand Tracker\\Web API\\Web API.csproj",
       "projectName": "Web API",
       "projectPath": "C:\\Users\\Tj\\Documents\\GitHub\\Hand Tracker\\Web API\\Web API.csproj",
-      "packagesPath": "C:\\Users\\CodexSandboxOffline\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Tj\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Tj\\Documents\\GitHub\\Hand Tracker\\Web API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [

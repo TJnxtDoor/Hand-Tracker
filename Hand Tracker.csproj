@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>Hand_Tracker</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -13,12 +13,22 @@
     <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.13.0.20260627" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
   <ItemGroup>
     <!-- Exclude Web API directory to avoid compiling its files in this project -->
     <Compile Remove="Web API\**" />
     <Content Remove="Web API\**" />
     <EmbeddedResource Remove="Web API\**" />
     <None Remove="Web API\**" />
+
+    <!-- Exclude tests directory from the main application compilation -->
+    <Compile Remove="tests\**" />
+    <Content Remove="tests\**" />
+    <EmbeddedResource Remove="tests\**" />
+    <None Remove="tests\**" />
 
     <!-- Exclude Test.cs from the main application compilation -->
     <Compile Remove="Test.cs" />

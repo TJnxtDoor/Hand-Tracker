@@ -1,20 +1,11 @@
-C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\Hand Tracker.exe
 C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\Hand Tracker.deps.json
-C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\Hand Tracker.runtimeconfig.json
 C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\Hand Tracker.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\Hand Tracker.pdb
-C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\OpenCvSharp.dll
-C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\runtimes\win-x64\native\OpenCvSharpExtern.dll
-C:\Users\Tj\Documents\GitHub\Hand Tracker\bin\Debug\net10.0\runtimes\win-x64\native\opencv_videoio_ffmpeg4130_64.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.csproj.AssemblyReference.cache
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.AssemblyInfoInputs.cache
-C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.AssemblyInfo.cs
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.csproj.CoreCompileInputs.cache
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.sourcelink.json
-C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tra.CDC875D9.Up2Date
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\refint\Hand Tracker.dll
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.pdb
-C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\Hand Tracker.genruntimeconfig.cache
 C:\Users\Tj\Documents\GitHub\Hand Tracker\obj\Debug\net10.0\ref\Hand Tracker.dll
